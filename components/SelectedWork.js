@@ -3,15 +3,19 @@
 import { useMemo, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { LazyMotion, m, AnimatePresence } from "framer-motion";
 import Reveal from "./Reveal";
 import { projects, otherProjects } from "@/data/portfolio";
 
-const filters = ["All", "Backend", "Full Stack", "Frontend"];
+const filters = ["All", "Backend", "Full Stack", "Exploration"];
+
+// Layout animations (filter pill, card reflow) need the larger feature set.
+// It is loaded on demand so it does not sit in the initial bundle.
+const loadLayoutFeatures = () => import("framer-motion").then((mod) => mod.domMax);
 
 function ProjectCard({ project, index }) {
   return (
-    <motion.article
+    <m.article
       layout
       initial={{ opacity: 0, y: 30 }}
       animate={{ opacity: 1, y: 0 }}
@@ -57,7 +61,7 @@ function ProjectCard({ project, index }) {
           ))}
         </div>
       </Link>
-    </motion.article>
+    </m.article>
   );
 }
 
@@ -65,16 +69,19 @@ export default function SelectedWork() {
   const [filter, setFilter] = useState("All");
 
   const visible = useMemo(
-    () => (filter === "All" ? projects : projects.filter((p) => p.category === filter)),
+    () => (filter === "All" ? projects : filter === "Exploration"
+      ? projects.filter((p) => p.category === "Frontend")
+      : projects.filter((p) => p.category === filter)),
     [filter]
   );
 
   return (
+    <LazyMotion features={loadLayoutFeatures} strict>
     <section id="work" className="mx-auto w-full max-w-6xl px-6 py-28 md:px-10">
       <Reveal className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
         <div>
           <p className="mb-4 text-sm font-medium uppercase tracking-[0.3em] text-ink-soft">/Selected work</p>
-          <h2 className="section-title text-[clamp(2.6rem,8vw,6rem)]">Projects</h2>
+          <h2 className="section-title text-[clamp(2.6rem,8vw,5.5rem)]">Projects</h2>
         </div>
         <div className="glass flex w-fit gap-1 rounded-full p-1">
           {filters.map((f) => (
@@ -87,7 +94,7 @@ export default function SelectedWork() {
               }`}
             >
               {filter === f && (
-                <motion.span
+                <m.span
                   layoutId="filter-pill"
                   className="absolute inset-0 rounded-full bg-ink"
                   transition={{ type: "spring", stiffness: 380, damping: 32 }}
@@ -99,13 +106,13 @@ export default function SelectedWork() {
         </div>
       </Reveal>
 
-      <motion.div layout className="mt-14 grid gap-x-8 gap-y-14 md:grid-cols-2">
+      <m.div layout className="mt-14 grid gap-x-8 gap-y-14 md:grid-cols-2">
         <AnimatePresence mode="popLayout">
           {visible.map((p, i) => (
             <ProjectCard key={p.slug} project={p} index={i} />
           ))}
         </AnimatePresence>
-      </motion.div>
+      </m.div>
 
       <Reveal className="mt-20">
         <p className="mb-6 text-sm font-medium uppercase tracking-[0.3em] text-ink-soft">More on GitHub</p>
@@ -129,5 +136,6 @@ export default function SelectedWork() {
         </ul>
       </Reveal>
     </section>
+    </LazyMotion>
   );
 }

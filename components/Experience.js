@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import Reveal from "./Reveal";
 import { experiences, education, achievements } from "@/data/portfolio";
 
@@ -15,8 +15,8 @@ export default function Experience() {
         <Reveal>
           <p className="mb-4 text-sm font-medium uppercase tracking-[0.3em] text-white/50">/Experience</p>
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
-            <h2 className="section-title text-[clamp(2.6rem,8vw,6rem)]">Where I&apos;ve worked</h2>
-            <p className="text-sm text-white/60">Hands-on internships, shipped systems</p>
+            <h2 className="section-title text-[clamp(2.6rem,8vw,6rem)]">Experience</h2>
+            <p className="text-sm text-white/60">Hands-on experience</p>
           </div>
         </Reveal>
 
@@ -48,7 +48,7 @@ export default function Experience() {
 
                 <AnimatePresence initial={false}>
                   {isOpen && (
-                    <motion.ul
+                    <m.ul
                       key="points"
                       initial={{ height: 0, opacity: 0 }}
                       animate={{ height: "auto", opacity: 1 }}
@@ -62,7 +62,7 @@ export default function Experience() {
                           {p}
                         </li>
                       ))}
-                    </motion.ul>
+                    </m.ul>
                   )}
                 </AnimatePresence>
               </Reveal>

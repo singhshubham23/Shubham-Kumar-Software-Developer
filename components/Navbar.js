@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { m, AnimatePresence } from "framer-motion";
 import Link from "next/link";
 import { navLinks, profile } from "@/data/portfolio";
 
@@ -18,11 +18,11 @@ export default function Navbar() {
 
   return (
     <header className="pointer-events-none fixed inset-x-0 top-4 z-50 flex justify-center px-4">
-      <motion.nav
+      <m.nav
         initial={{ y: -30, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-        className={`pointer-events-auto flex w-full max-w-5xl items-center justify-between rounded-full px-3 py-2 transition-shadow duration-500 glass ${
+        className={`pointer-events-auto flex w-full items-center justify-between rounded-full px-3 py-2 transition-shadow duration-500 glass ${
           scrolled ? "shadow-[0_12px_40px_-16px_rgba(0,0,0,0.25)]" : ""
         }`}
       >
@@ -30,11 +30,16 @@ export default function Navbar() {
           <span className="grid h-7 w-7 place-items-center rounded-full bg-ink text-[11px] font-bold text-white">
             SK
           </span>
-          <span className="hidden sm:inline">{profile.fullName}</span>
+          <span className="hidden sm:inline">{profile.availability}</span>
         </Link>
 
         <ul className="hidden items-center gap-1 md:flex">
-          {navLinks.map((l) => (
+          {[
+            { label: "Work", href: "#work" },
+            { label: "Service", href: "#services" },
+            { label: "Experience", href: "#experience" },
+            { label: "Contact", href: "#contact" },
+          ].map((l) => (
             <li key={l.href}>
               <a
                 href={l.href}
@@ -67,15 +72,15 @@ export default function Navbar() {
             </span>
           </button>
         </div>
-      </motion.nav>
+      </m.nav>
 
       <AnimatePresence>
         {open && (
-          <motion.div
+          <m.div
             initial={{ opacity: 0, y: -8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -8 }}
-            className="pointer-events-auto glass absolute top-20 w-[calc(100%-2rem)] max-w-5xl rounded-3xl p-3 md:hidden"
+            className="pointer-events-auto glass absolute top-20 w-[calc(100%-2rem)] rounded-3xl p-3 md:hidden"
           >
             {navLinks.map((l) => (
               <a
@@ -87,7 +92,7 @@ export default function Navbar() {
                 {l.label}
               </a>
             ))}
-          </motion.div>
+          </m.div>
         )}
       </AnimatePresence>
     </header>

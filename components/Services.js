@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, m } from "framer-motion";
 import Reveal from "./Reveal";
 import { services } from "@/data/portfolio";
 
@@ -50,7 +50,7 @@ export default function Services() {
 
               <AnimatePresence initial={false}>
                 {isActive && (
-                  <motion.div
+                  <m.div
                     key="panel"
                     initial={{ height: 0, opacity: 0 }}
                     animate={{ height: "auto", opacity: 1 }}
@@ -79,7 +79,7 @@ export default function Services() {
                         />
                       </div>
                     </div>
-                  </motion.div>
+                  </m.div>
                 )}
               </AnimatePresence>
             </Reveal>
