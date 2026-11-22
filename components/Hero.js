@@ -49,8 +49,8 @@ export default function Hero() {
         </span>
       </h1>
 
-      <div className="relative mt-2 flex flex-1 items-end justify-center md:mt-4">
-        <div className="absolute bottom-24 left-0 z-20 max-w-sm md:bottom-28">
+      <div className="relative mt-3 flex flex-1 flex-col items-start justify-end md:mt-4 md:block">
+        <div className="relative z-30 order-2 mt-5 max-w-[220px] md:absolute md:bottom-28 md:left-0 md:order-none md:mt-0 md:max-w-sm">
           <p className="hero-fade text-xl font-semibold md:text-2xl" style={{ animationDelay: "0.8s" }}>
             {profile.role}
           </p>
@@ -74,7 +74,7 @@ export default function Hero() {
         </div>
 
         <div
-          className="hero-rise relative h-[420px] w-[330px] translate-y-6 md:h-[520px] md:w-[430px] md:translate-y-8"
+          className="hero-rise relative order-1 mx-auto h-[420px] w-[330px] md:absolute md:bottom-0 md:left-1/2 md:order-none md:mx-0 md:h-[520px] md:w-[430px] md:-translate-x-1/2 md:transform"
           style={{ animationDelay: "0.2s" }}
         >
           <Image
