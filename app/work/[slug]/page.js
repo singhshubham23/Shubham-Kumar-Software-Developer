@@ -33,7 +33,7 @@ export default async function ProjectPage({ params }) {
       <header className="mt-14 grid gap-8 md:grid-cols-[1.4fr_1fr] md:items-end">
         <div>
           <p className="mb-4 text-sm font-medium uppercase tracking-[0.3em] text-ink-soft">
-            /{project.category} · {project.year}
+            {project.category} · {project.year}
           </p>
           <h1 className="section-title text-[clamp(2.6rem,7vw,5.5rem)]">{project.title}</h1>
         </div>

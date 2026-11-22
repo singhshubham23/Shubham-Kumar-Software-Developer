@@ -13,7 +13,6 @@ export default function Experience() {
     <section id="experience" className="px-3 py-10 md:px-6">
       <div className="on-dark mx-auto w-full max-w-6xl overflow-hidden rounded-[2.5rem] bg-panel px-6 py-20 text-white md:px-12">
         <Reveal>
-          <p className="mb-4 text-sm font-medium uppercase tracking-[0.3em] text-white/50">/Experience</p>
           <div className="flex flex-col justify-between gap-6 md:flex-row md:items-end">
             <h2 className="section-title text-[clamp(2.6rem,8vw,6rem)]">Experience</h2>
             <p className="text-sm text-white/60">Hands-on experience</p>

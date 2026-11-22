@@ -39,24 +39,31 @@ const socials = [
 
 export default function Hero() {
   return (
-    <section id="top" className="relative mx-auto flex min-h-[100svh] w-full flex-col px-4 pb-10 pt-28 sm:px-6 md:px-10">
-      <h1 className="display relative z-20 mt-8 w-full whitespace-nowrap text-[clamp(3.2rem,10.5vw,10.5rem)]">
-        <span className="block w-full overflow-hidden text-center">
-          <span className="hero-mask block">
-            <span className="outline-text">{profile.firstName}</span>{" "}
-            <span>{profile.lastName}</span>
+    <section
+      id="top"
+      className="relative mx-auto flex min-h-[100svh] w-full flex-col justify-between px-4 pb-12 pt-24 sm:px-6 sm:pb-14 sm:pt-28 md:px-10 lg:pb-0 lg:pt-24 xl:pt-28"
+    >
+      <h1 className="display relative z-10 mt-2 w-full select-none text-center sm:mt-4 lg:mt-2">
+        <span className="block w-full overflow-hidden">
+          <span className="hero-mask inline-flex flex-col items-center justify-center text-[clamp(2.75rem,8.5vw,9.5rem)] leading-[0.95] tracking-tightest sm:flex-row sm:leading-[0.88] sm:gap-x-4 md:gap-x-6 lg:gap-x-8">
+            <span className="outline-text block sm:inline">{profile.firstName}</span>{" "}
+            <span className="block sm:inline">{profile.lastName}</span>
           </span>
         </span>
       </h1>
 
-      <div className="relative mt-3 flex flex-1 flex-col items-start justify-end md:mt-4 md:block">
-        <div className="relative z-30 order-2 mt-5 max-w-[220px] md:absolute md:bottom-28 md:left-0 md:order-none md:mt-0 md:max-w-sm">
-          <p className="hero-fade text-xl font-semibold md:text-2xl" style={{ animationDelay: "0.8s" }}>
+      <div className="relative z-20 mt-4 flex flex-1 flex-col justify-end w-full sm:mt-6 lg:mt-auto lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-end">
+        {/* Left Column: Role, Tagline, CTA */}
+        <div className="relative z-30 order-2 flex flex-col items-center text-center lg:order-1 lg:items-start lg:text-left lg:pb-16 xl:pb-20 w-full max-w-md mx-auto lg:mx-0 lg:max-w-[300px] xl:max-w-sm">
+          <p
+            className="hero-fade text-xl font-semibold sm:text-2xl"
+            style={{ animationDelay: "0.8s" }}
+          >
             {profile.role}
           </p>
 
           <p
-            className="hero-fade mt-3 max-w-xs text-sm leading-relaxed text-ink-soft md:text-base"
+            className="hero-fade mt-3 max-w-xs text-sm leading-relaxed text-ink-soft sm:text-base"
             style={{ animationDelay: "0.95s" }}
           >
             {profile.tagline}. Building secure, scalable systems.
@@ -71,38 +78,64 @@ export default function Hero() {
               <span className="transition group-hover:translate-x-1">↗</span>
             </a>
           </div>
+
+          {/* Socials on mobile & tablet */}
+          <ul
+            className="hero-fade mt-6 flex flex-wrap items-center justify-center gap-2.5 lg:hidden"
+            style={{ animationDelay: "1.2s" }}
+          >
+            {socials.map((s) => (
+              <li key={s.label}>
+                <a
+                  href={s.href}
+                  target={s.href.startsWith("mailto") ? undefined : "_blank"}
+                  rel="noopener noreferrer"
+                  className="glass inline-flex items-center gap-2 rounded-full px-4 py-2 text-xs font-medium transition hover:scale-[1.03]"
+                >
+                  {s.label}
+                  <span aria-hidden>↗</span>
+                </a>
+              </li>
+            ))}
+          </ul>
         </div>
 
-        <div
-          className="hero-rise relative order-1 mx-auto h-[420px] w-[330px] md:absolute md:bottom-0 md:left-1/2 md:order-none md:mx-0 md:h-[520px] md:w-[430px] md:-translate-x-1/2 md:transform"
-          style={{ animationDelay: "0.2s" }}
-        >
-          <Image
-            src="/images/hero.png"
-            alt={`${profile.fullName}, ${profile.role}`}
-            fill
-            priority
-            quality={80}
-            sizes="(max-width: 768px) 330px, 430px"
-            className="object-contain object-bottom"
-          />
+        {/* Center Column: Hero Image */}
+        <div className="relative z-20 order-1 flex justify-center items-end lg:order-2 lg:-mt-12 xl:-mt-16 2xl:-mt-20">
+          <div
+            className="hero-rise relative mx-auto w-[240px] h-[300px] sm:w-[290px] sm:h-[365px] md:w-[330px] md:h-[415px] lg:w-[370px] lg:h-[465px] xl:w-[420px] xl:h-[525px] 2xl:w-[450px] 2xl:h-[560px]"
+            style={{ animationDelay: "0.2s" }}
+          >
+            <Image
+              src="/images/hero.png"
+              alt={`${profile.fullName}, ${profile.role}`}
+              fill
+              priority
+              quality={75}
+              sizes="(max-width: 640px) 240px, (max-width: 768px) 290px, (max-width: 1024px) 330px, (max-width: 1280px) 370px, 420px"
+              className="object-contain object-bottom pointer-events-none select-none"
+            />
+          </div>
         </div>
 
-        <ul className="absolute bottom-24 right-0 z-20 hidden w-32 flex-col gap-3 md:flex">
-          {socials.map((s) => (
-            <li key={s.label}>
-              <a
-                href={s.href}
-                target={s.href.startsWith("mailto") ? undefined : "_blank"}
-                rel="noopener noreferrer"
-                className="glass flex items-center justify-between rounded-full px-4 py-3 text-sm font-medium transition hover:translate-x-1"
-              >
-                {s.label}
-                <span aria-hidden>↗</span>
-              </a>
-            </li>
-          ))}
-        </ul>
+        {/* Right Column: Desktop Social Links */}
+        <div className="order-3 hidden lg:flex flex-col items-end justify-end pb-16 xl:pb-20">
+          <ul className="flex flex-col gap-3 w-32">
+            {socials.map((s) => (
+              <li key={s.label}>
+                <a
+                  href={s.href}
+                  target={s.href.startsWith("mailto") ? undefined : "_blank"}
+                  rel="noopener noreferrer"
+                  className="glass flex items-center justify-between rounded-full px-4 py-3 text-sm font-medium transition hover:translate-x-1"
+                >
+                  {s.label}
+                  <span aria-hidden>↗</span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
       </div>
     </section>
   );

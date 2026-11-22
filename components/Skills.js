@@ -5,7 +5,6 @@ export default function Skills() {
   return (
     <section id="skills" className="mx-auto w-full max-w-6xl px-6 py-28 md:px-10">
       <Reveal>
-        <p className="mb-4 text-sm font-medium uppercase tracking-[0.3em] text-ink-soft">/Skills</p>
         <h2 className="section-title text-[clamp(2.6rem,8vw,6rem)]">Toolkit</h2>
       </Reveal>
 

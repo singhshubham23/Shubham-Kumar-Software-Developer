@@ -80,7 +80,6 @@ export default function SelectedWork() {
     <section id="work" className="mx-auto w-full max-w-6xl px-6 py-28 md:px-10">
       <Reveal className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
         <div>
-          <p className="mb-4 text-sm font-medium uppercase tracking-[0.3em] text-ink-soft">/Selected work</p>
           <h2 className="section-title text-[clamp(2.6rem,8vw,5.5rem)]">Projects</h2>
         </div>
         <div className="glass flex w-fit gap-1 rounded-full p-1">

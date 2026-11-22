@@ -14,7 +14,6 @@ export default function Services() {
   return (
     <section id="services" className="mx-auto w-full max-w-6xl px-6 py-28 md:px-10">
       <Reveal>
-        <p className="mb-4 text-sm font-medium uppercase tracking-[0.3em] text-ink-soft">/Service</p>
         <h2 className="section-title text-[clamp(2.6rem,8vw,6rem)]">What I build</h2>
       </Reveal>
 
